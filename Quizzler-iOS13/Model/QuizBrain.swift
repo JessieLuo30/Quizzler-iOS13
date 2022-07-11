@@ -25,9 +25,11 @@ struct QuizBrian {
 
     ]
     var questionNumber = 0
+    var score = 0
     
-    func checkAnswer(_ userAnswer: String) -> Bool {
+    mutating func checkAnswer(_ userAnswer: String) -> Bool {
         if userAnswer == quiz[questionNumber].answer {
+            score += 1
             return true
         } else {
             return false
@@ -38,6 +40,10 @@ struct QuizBrian {
         return quiz[questionNumber].text
     }
     
+    func getScore() -> Int {
+        return score
+    }
+    
     func getProgress() -> Float {
         return Float(questionNumber + 1) / Float(quiz.count)
     }
@@ -46,7 +52,8 @@ struct QuizBrian {
         if questionNumber + 1 < quiz.count {
             questionNumber += 1
         } else {
-            questionNumber = 0;
+            questionNumber = 0
+            score = 0
         }
     }
     
